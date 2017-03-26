@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dimpychhabra.capo.MyProfile"
+    tools:showIn="@layout/app_bar_my_profile">
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/capopic" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLightPrimaryColor"
+        android:gravity="center"
+        android:padding="8dp"
+        android:shadowColor="@color/colorHoloBlue"
+        android:text="Name"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvCollege"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLightPrimaryColor"
+        android:gravity="center"
+        android:padding="8dp"
+        android:shadowColor="@color/colorHoloBlue"
+        android:text="College"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLightPrimaryColor"
+        android:gravity="center"
+        android:padding="8dp"
+        android:shadowColor="@color/colorHoloBlue"
+        android:text="email ID"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLightPrimaryColor"
+        android:gravity="center"
+        android:padding="8dp"
+        android:shadowColor="@color/colorHoloBlue"
+        android:text="Mobile Number"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLightPrimaryColor"
+        android:gravity="center"
+        android:padding="8dp"
+        android:shadowColor="@color/colorHoloBlue"
+        android:text="My Car Dets (if any)"
+        android:textSize="25sp" />
+
+    <!-- On click : fragment that inputs new value for
+    the textView clicked on. Everything except mobile
+    number can be changed-->
+
+</LinearLayout>

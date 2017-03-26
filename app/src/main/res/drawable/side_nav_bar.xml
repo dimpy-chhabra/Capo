@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+    <gradient
+        android:startColor="@color/colorLightPrimaryColor"
+        android:centerColor="@color/colorPrimaryDark"
+        android:endColor="@color/colorPrimaryDark"
+        android:type="linear"
+        android:angle="45"/>
+    <!-- type  : Sweep, Linear, radial(some err),    -->
+    <!-- angle : 135, 180, 90, 45, 22.5   -->
+</shape>

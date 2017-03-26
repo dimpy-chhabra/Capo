@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/myprofile"
+            android:title="My profile" />
+        <item
+            android:id="@+id/nav_get_capo"
+            android:icon="@drawable/getcapo"
+            android:title="Get me a Capo" />
+        <item
+            android:id="@+id/nav_lets_capo"
+            android:icon="@drawable/letscapo"
+            android:title="Let's Capo" />
+        <item
+            android:id="@+id/nav_track"
+            android:icon="@drawable/track"
+            android:title="Track" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

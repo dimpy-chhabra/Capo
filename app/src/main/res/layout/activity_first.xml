@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.dimpychhabra.capo.FirstActivity">
+
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/dummy_button"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:src="@drawable/capopic"/>
+
+</FrameLayout>

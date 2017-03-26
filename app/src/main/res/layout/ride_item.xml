@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="20sp"
+    android:padding="10sp"
+    android:layout_height="200sp"
+    android:background="@color/colorLightPrimaryColor">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:padding="10sp"
+        android:background="@color/colorWhite"
+        android:weightSum="1">
+
+
+        <TextView
+            android:padding="16sp"
+            android:id="@+id/pricetag"
+            android:background="@drawable/price"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Rs. 10,000"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:layout_width="230dp"
+            android:padding="10sp"
+            android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:text="Here we insert a shape with a to and from kind of diagram"
+            android:id="@+id/textViewDirections" />
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <TextClock
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:background="@color/colorLightPrimaryColor"
+            android:id="@+id/textClock" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

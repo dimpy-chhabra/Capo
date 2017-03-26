@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dimpychhabra.capo.Main_found_Frag">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rides Found"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryText"
+        android:id="@+id/tv1"
+        android:gravity="center"/>
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv1"
+        android:orientation="vertical"
+        android:id="@+id/list"
+        android:drawSelectorOnTop="true"/>
+
+
+
+</RelativeLayout>
