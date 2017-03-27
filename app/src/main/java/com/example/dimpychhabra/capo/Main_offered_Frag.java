@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class Main_offered_Frag extends Fragment {
@@ -35,7 +38,16 @@ public class Main_offered_Frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_main_offered_, container, false);
+        //here we will fetch data from database via volley --> make an object --> set adapter and work accordingly
+        final ArrayList<Ride> ridesArrayList = new ArrayList<>();
+        ridesArrayList.add(new Ride("lj", "kj"));
+        ridesArrayList.add(new Ride("PitamPura", "Kashmere Gate"));
+        ridesArrayList.add(new Ride("Rohini", "Kashmere Gate"));
+        ridesArrayList.add(new Ride("NSP", "Kashmere Gate"));
 
+        RideAdapter rideAdapter = new RideAdapter(getActivity(), ridesArrayList);
+        ListView listView = (ListView) view.findViewById(R.id.list);
+        listView.setAdapter(rideAdapter);
 
         return view;
     }

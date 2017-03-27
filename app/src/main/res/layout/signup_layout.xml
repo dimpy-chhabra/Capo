@@ -90,7 +90,7 @@
         android:drawableLeft="@drawable/pic"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/location"
+        android:hint="@string/college"
         android:inputType="textCapWords"
         android:padding="10dp"
         android:singleLine="true"

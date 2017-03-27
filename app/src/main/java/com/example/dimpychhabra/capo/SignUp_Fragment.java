@@ -4,12 +4,15 @@ package com.example.dimpychhabra.capo;
  * Created by Dimpy Chhabra on 3/20/2017.
  */
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +23,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static View view;
     private static EditText fullName, emailId, mobileNumber, location,
@@ -27,6 +38,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
+    RequestQueue requestQueue;
+    StringRequest stringRequest;
+
+    private static String DataParseUrl = "http://impycapo.esy.es/register.php";
 
     public SignUp_Fragment() {
 
@@ -101,20 +116,14 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getConfirmPassword = confirmPassword.getText().toString();
 
         // Pattern match for email id
-        Pattern p = Pattern.compile(BaseActivity.regEx);
-        Matcher m = p.matcher(getEmailId);
+        //Pattern p = Pattern.compile(BaseActivity.regEx);
+        //Matcher m = p.matcher(getEmailId);
 
         // Check if all strings are null or not
-        if (getFullName.equals("") || getFullName.length() == 0
-                || getEmailId.equals("") || getEmailId.length() == 0
-                || getMobileNumber.equals("") || getMobileNumber.length() == 0
-                || getLocation.equals("") || getLocation.length() == 0
-                || getPassword.equals("") || getPassword.length() == 0
-                || getConfirmPassword.equals("")
-                || getConfirmPassword.length() == 0)
 
-            new CustomToast().Show_Toast(getActivity(), view,
-                    "All fields are required.");
+
+        if (getFullName.equals("") || getEmailId.equals("") || getMobileNumber.equals("") || getLocation.equals("") || getPassword.equals("") || getConfirmPassword.equals(""))
+            new CustomToast().Show_Toast(getActivity(), view, "All fields are required.");
 
             // Check if email id valid or not
             //else if (!m.find())
@@ -132,9 +141,59 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                     "Please select Terms and Conditions.");
 
             // Else do signup or do your stuff
-        else
-            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
-                    .show();
+        else {
+            Toast.makeText(getActivity(), "Do SignUp. >>" + getFullName + " " + getEmailId + " " + getMobileNumber + " " + getLocation + " " + getPassword + " " + getConfirmPassword + " << ", Toast.LENGTH_SHORT).show();
 
+            registerUser(getFullName, getEmailId, getMobileNumber, getLocation, getPassword);
+        }
+    }
+
+    public void registerUser(String name, final String email, String mob, String college, String passwrd) {
+        final String Name = name;
+        final String Email = email;
+        final String Mob = mob;
+        final String College = college;
+        final String Pword = passwrd;
+        stringRequest = new StringRequest(Request.Method.POST, DataParseUrl, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                if (response != null && response.length() > 0)
+                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getContext(), "Something went terribly wrong! ", Toast.LENGTH_LONG).show();
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error != null && error.toString().length() > 0)
+                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getContext(), "Something went terribly wrong! ", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", Name);
+                params.put("mob_no", Mob);
+                params.put("college", College);
+                params.put("email", Email);
+                params.put("dob", "dummy");
+                params.put("sex", "dummy");
+                params.put("pword", Pword);
+                params.put("dp", "dummy");
+                params.put("fb_link", "dummy");
+
+                return params;
+            }
+
+        };
+        //stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 }

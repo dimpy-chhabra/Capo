@@ -41,7 +41,7 @@
     <string name="newUser">Not a Member yet? Sign Up here.</string>
     <string name="fullName">Full Name</string>
     <string name="mobileNumber">Mobile Number</string>
-    <string name="location">Location</string>
+    <string name="college">College</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="terms_conditions">By clicking SignUp you agree all the Terms and Conditions.</string>
     <string name="signUp">SIGN UP</string>

@@ -3,6 +3,9 @@ package com.example.dimpychhabra.capo;
 /**
  * Created by Dimpy Chhabra on 3/20/2017.
  */
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +20,7 @@ import android.support.v4.app.FragmentManager;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +35,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 /**
  * Created by Dimpy Chhabra on 3/20/2017.
  */
@@ -45,6 +57,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static LinearLayout loginLayout;
     private static Animation shakeAnimation;
     private static FragmentManager fragmentManager;
+    RequestQueue requestQueue;
+    StringRequest stringRequest;
+
+    private static String DataParseUrl = "http://impycapo.esy.es/login.php";
 
     public Login_Fragment() {
 
@@ -186,22 +202,75 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         // Else do login and do your stuff
 
         else {
-            Toast.makeText(getActivity(), "Presuming on Online Testing we got a success", Toast.LENGTH_SHORT).show();
-            SharedPreferences preferences = this.getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(BaseActivity.Name, "Dimpy123" );
-            editor.putString(BaseActivity.IS_LOGIN, "true");
-            editor.putString(BaseActivity.Phone, "8586849999" );
-            editor.putString(BaseActivity.displaypic, "@drawable/dc" );
-            editor.putString(BaseActivity.College, "IGDTUW" );
-            editor.putString(BaseActivity.Email, "abc@xyz.com" );
-            editor.putString(BaseActivity.Extras, "Female, 19 years old, does not have license :O ");
-            editor.commit();
-            Toast.makeText(getActivity(), "Shared Pref added!", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getActivity(), MainActivity.class);
-            startActivity(i);
+
+            checkAuthenticity(getEmailId, getPassword);
+
 
         }
+    }
+
+    private void checkAuthenticity(String getEmailId, String getPassword) {
+        final String mobile = getEmailId;
+        final String pword = getPassword;
+
+        stringRequest = new StringRequest(Request.Method.POST, DataParseUrl, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                if (!response.equals("noBro")) {
+                    verified();
+
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "wrong username or password", Toast.LENGTH_LONG).show();
+                    Log.e("in login frag", "" + response);
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error != null && error.toString().length() > 0)
+                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getContext(), "Something went terribly wrong! ", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mob_no", mobile);
+                params.put("pword", pword);
+
+                return params;
+            }
+
+        };
+        //stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+    private void verified() {
+        Toast.makeText(getActivity(), "Successfully Loged IN!", Toast.LENGTH_SHORT).show();
+        SharedPreferences preferences = this.getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BaseActivity.Name, "Dimpy123");
+        editor.putString(BaseActivity.IS_LOGIN, "true");
+        editor.putString(BaseActivity.Phone, "8586849999");
+        editor.putString(BaseActivity.displaypic, "@drawable/dc");
+        editor.putString(BaseActivity.College, "IGDTUW");
+        editor.putString(BaseActivity.Email, "abc@xyz.com");
+        editor.putString(BaseActivity.Extras, "Female, 19 years old, does not have license :O ");
+        editor.commit();
+        Toast.makeText(getActivity(), "Shared Pref added!", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
+
+
     }
 
 }

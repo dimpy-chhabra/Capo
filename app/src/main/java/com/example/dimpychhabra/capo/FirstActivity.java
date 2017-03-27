@@ -23,9 +23,14 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
         ib1=(ImageButton)findViewById(R.id.dummy_button);
         SharedPreferences spref = getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
-        String a = spref.getString(BaseActivity.Name, null); // getting String
-        String b = spref.getString(BaseActivity.Phone, null);
-        String c = spref.getString(BaseActivity.IS_LOGIN, "false");
+        final String a = spref.getString(BaseActivity.Name, null); // getting String
+        final String b = spref.getString(BaseActivity.Phone, null);
+        final String c = spref.getString(BaseActivity.IS_LOGIN, "false");
+
+
+        ib1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
         Log.e("in FullScreen Activity ","name : "+a+" phone : "+b+" isloggedin? : "+c);
         if(c.equals("true")){
@@ -38,12 +43,9 @@ public class FirstActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-            //ib1.setOnClickListener(new View.OnClickListener(){
-            //@Override
-            //public void onClick(View v){
 
-            //}
-        //});
+            }
+        });
     }
 }
 

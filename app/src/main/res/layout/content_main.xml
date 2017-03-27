@@ -28,12 +28,4 @@
         android:layout_centerHorizontal="true" />
 
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/ViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@id/tv1"
-            android:padding="16sp"
-            android:background="@color/colorPrimaryDarkTransy" />
-
 </RelativeLayout>
