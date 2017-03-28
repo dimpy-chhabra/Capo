@@ -24,13 +24,16 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class Main_found_Frag extends Fragment {
-
+    private static ListView listView;
     private static View view;
+    private static TextView tv2;
     private static Button button;
     private static EditText to, from, fromTime;
     private static FragmentManager fragmentManager;
@@ -50,6 +53,22 @@ public class Main_found_Frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_main_found_, container, false);
+        tv2 = (TextView) view.findViewById(R.id.tv2);
+        fragmentManager = getActivity().getSupportFragmentManager();
+        //     initViews();
+        //     setListeners();
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                        .replace(R.id.frameContainerTrack, new Main_offered_Frag(),
+                                BaseActivity.offered_rides_Frag).commit();
+            }
+        });
+
+        listView = (ListView) view.findViewById(R.id.list);
 
         final ArrayList<Ride> ridesArrayList = new ArrayList<>(); //Max Price
         ridesArrayList.add(new Ride("Rajiv Chownk", "IGDTU", " 3 seats ", " 10:00 am ", "12:00 pm ", " 120", "0001"));
@@ -65,15 +84,48 @@ public class Main_found_Frag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Ride word = ridesArrayList.get(position);
+                Ride ride = ridesArrayList.get(position);
                 //menu pop up... click on one to send a request! and then print toast as a new row is created in the propsal table
+                Toast.makeText(getActivity().getApplicationContext(), "yo " + ride.getR_id(), Toast.LENGTH_SHORT).show();
 
+                My_found_ride_Frag frag = new My_found_ride_Frag();
+                Bundle args = new Bundle();
+                args.putString("rideId", "" + ride.getR_id());
+                frag.setArguments(args);
+
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frameContainerTrack, frag,
+                                BaseActivity.my_found_ride_Frag).commit();
 
             }
         });
+        /*
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Ride ride = ridesArrayList.get(position);
+                Log.e("onItem Click ", " " + ride.getR_id());
+
+        My_offered_rides_Frag frag = new My_offered_rides_Frag();
+        Bundle args = new Bundle();
+        args.putString("rideId", "" + ride.getR_id());
+
+
+        frag.setArguments(args);
+
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.frameContainerTrack, frag,
+                        BaseActivity.offered_rides_Frag).commit();
+    }
+});
+         */
 
 
         return view;
     }
+
 
 }

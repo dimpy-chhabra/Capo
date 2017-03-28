@@ -38,8 +38,11 @@ public class BaseActivity extends AppCompatActivity
     public static final String letsCapo_Frag2 = "letsCapo_Frag2";
     public static final String getCapo_Frag1 = "getCapo_Frag1";
     public static final String getCapo_Frag2 = "getCapo_Frag2";
-    public static final String offered_rides_Frag = "My_offered_rides_Frag";
-    public static final String xxx = "zzz";
+    public static final String offered_rides_Frag = "Main_offered_Frag";
+    public static final String found_rides_Frag = "Main_found_Frag";
+    public static final String my_offered_ride_Frag = "My_offered_rides_Frag";
+    public static final String my_found_ride_Frag = "My_found_ride_Frag";
+
 
     //Shared Pref Column Names
     public static final String MyPref = "MPref";

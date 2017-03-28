@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class Main_offered_Frag extends Fragment {
     Button button;
     EditText to, from, fromTime;
     FragmentManager fragmentManager;
+    TextView tv11, tv22;
 
     public Main_offered_Frag() {
         // Required empty public constructor
@@ -50,6 +52,20 @@ public class Main_offered_Frag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_main_offered_, container, false);
+        fragmentManager = getActivity().getSupportFragmentManager();
+        tv11 = (TextView) view.findViewById(R.id.tv11);
+
+        tv11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.right_out, R.anim.left_enter)
+                        .replace(R.id.frameContainerTrack, new Main_found_Frag(),
+                                BaseActivity.found_rides_Frag).commit();
+            }
+        });
+
         //here we will fetch data from database via volley --> make an object --> set adapter and work accordingly
         final ArrayList<Ride> ridesArrayList = new ArrayList<>();
         ridesArrayList.add(new Ride("Rajiv Chownk", "IGDTU", " 3 seats ", " 10:00 am ", "12:00 pm ", " 120", "ride001"));
@@ -79,12 +95,13 @@ public class Main_offered_Frag extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("rideId", "" + ride.getR_id());
 
+
                 frag.setArguments(args);
-                getFragmentManager()
+
+                fragmentManager
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .add(R.id.ViewPagerTrack, frag, BaseActivity.offered_rides_Frag)
-                        .commit();
+                        .replace(R.id.frameContainerTrack, frag,
+                                BaseActivity.offered_rides_Frag).commit();
             }
         });
 

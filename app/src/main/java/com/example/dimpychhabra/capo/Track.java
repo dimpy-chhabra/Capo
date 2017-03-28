@@ -21,6 +21,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -50,7 +52,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Track extends BaseActivity {
-
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,28 +79,68 @@ public class Track extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.ViewPagerTrack);
+///////////////////        ////////////
+        fragmentManager = getSupportFragmentManager();
 
-        // Create an adapter object that knows which fragment should be shown on each page
-        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter);
+        // If savedinstnacestate is null then replace login fragment
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frameContainerTrack, new Main_found_Frag(), BaseActivity.found_rides_Frag)
+                    .commit();
+        }
     }
 
+    // Replace Login Fragment with animation
+ /*   protected void replaceFoundRidesFragment() {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainerTrack, new Main_offered_Frag(),
+                        BaseActivity.offered_rides_Frag).commit();
+    }
+    protected void replaceOfferedRidesFragment() {
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainerTrack, new Main_found_Frag(),
+                        BaseActivity.found_rides_Frag).commit();
+    }
+*/
     @Override
     public void onBackPressed() {
+
+/*        Fragment Main_found_Frag = fragmentManager
+                .findFragmentByTag(BaseActivity.found_rides_Frag);
+        Fragment Main_offered_Frag = fragmentManager
+                .findFragmentByTag(BaseActivity.offered_rides_Frag);
+*/
+        Fragment My_offered_rides_frag = fragmentManager
+                .findFragmentByTag(BaseActivity.my_offered_ride_Frag);
+        Fragment My_found_ride_Frag = fragmentManager
+                .findFragmentByTag(BaseActivity.my_found_ride_Frag);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (My_offered_rides_frag != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frameContainerTrack, new Main_offered_Frag(), BaseActivity.offered_rides_Frag)
+                    .commit();
+        } else if (My_found_ride_Frag != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frameContainerTrack, new Main_found_Frag(), BaseActivity.found_rides_Frag)
+                    .commit();
         } else {
             Intent i = new Intent(Track.this, MainActivity.class);
             startActivity(i);
             finish();
-            // super.onBackPressed();
 
         }
     }
+
+    ///////////////////        ///////////
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
