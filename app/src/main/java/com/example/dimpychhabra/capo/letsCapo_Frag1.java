@@ -7,6 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+/*
+*Project : CAPO, fully created by
+* Dimpy Chhabra, IGDTUW, BTech, IT
+* Second year (as of 2017)
+* Expected Class of 2019
+* Please do not circulate as your own
+* Criticism is appreciated to work on memory leaks and bugs
+* Contact Info : Find me on Linked in : linkedin.com/in/dimpy-chhabra
+*
+*/
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;

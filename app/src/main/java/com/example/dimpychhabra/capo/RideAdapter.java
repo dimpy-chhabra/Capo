@@ -5,11 +5,23 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+/*
+*Project : CAPO, fully created by
+* Dimpy Chhabra, IGDTUW, BTech, IT
+* Second year (as of 2017)
+* Expected Class of 2019
+* Please do not circulate as your own
+* Criticism is appreciated to work on memory leaks and bugs
+* Contact Info : Find me on Linked in : linkedin.com/in/dimpy-chhabra
+*
+*/
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,15 +49,20 @@ public class RideAdapter extends ArrayAdapter<Ride>{
 
         Ride currentRide = getItem(position);
 
-        TextView defaultTextView = (TextView) listItemView.findViewById(R.id.textViewDirections);
-        defaultTextView.setText(currentRide.getStart_loc("34344") + currentRide.getDesti_loc("34344"));
+        TextView fromTo = (TextView) listItemView.findViewById(R.id.textViewDirections);
+        fromTo.setText(currentRide.getStart_loc() + " TO " + currentRide.getDesti_loc());
 
-        TextView frenchTextView = (TextView) listItemView.findViewById(R.id.pricetag);
-        frenchTextView.setText(currentRide.getNo_seats("34344"));
+        TextView price = (TextView) listItemView.findViewById(R.id.Seats);
+        price.setText(" Seats: " + (currentRide.getNo_seats()) + " and Occupied " + currentRide.getNo_seats_occ());
 
-        TextClock tc = (TextClock)listItemView.findViewById(R.id.textClock);
-        tc.setFormat24Hour(currentRide.getStart_time("878787"));
+        TextView tc = (TextView) listItemView.findViewById(R.id.StartingTime);
+        tc.setText("at:" + currentRide.getStart_time());
 
+        TextView extras = (TextView) listItemView.findViewById(R.id.Extra);
+        extras.setText(" Extras : " + currentRide.getExtras());
+
+        TextView pricetag = (TextView) listItemView.findViewById(R.id.pricetag);
+        pricetag.setText("Rs. " + currentRide.getPrice());
 
         return listItemView;
     }

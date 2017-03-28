@@ -5,7 +5,8 @@
     android:layout_margin="20sp"
     android:padding="10sp"
     android:layout_height="200sp"
-    android:background="@color/colorLightPrimaryColor">
+    android:fadingEdgeLength="10sp"
+    android:background="@drawable/item_bg">
 
 
     <RelativeLayout
@@ -13,14 +14,14 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:padding="10sp"
-        android:background="@color/colorWhite"
         android:weightSum="1">
 
 
         <TextView
             android:padding="16sp"
+            android:textSize="15sp"
             android:id="@+id/pricetag"
-            android:background="@drawable/price"
+            android:background="@drawable/item_bg"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -29,14 +30,15 @@
             android:textColor="@color/colorWhite"/>
 
         <TextView
-            android:layout_width="230dp"
-            android:padding="10sp"
+            android:layout_width="match_parent"
+            android:padding="40sp"
+            android:gravity="right"
+            android:textSize="20sp"
+            android:maxLines="2"
             android:textStyle="bold"
             android:layout_height="match_parent"
             android:text="Here we insert a shape with a to and from kind of diagram"
             android:id="@+id/textViewDirections" />
-
-
 
     </RelativeLayout>
 
@@ -44,17 +46,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
+        android:paddingLeft="30sp"
+        android:paddingRight="30sp"
         android:orientation="horizontal">
 
-        <TextClock
+        <TextView
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:textSize="20dp"
-            android:background="@color/colorLightPrimaryColor"
-            android:id="@+id/textClock" />
+            android:text="Seats"
+            android:id="@+id/Seats" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Time"
+            android:id="@+id/StartingTime" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="Extras"
+            android:id="@+id/Extra" />
 
     </LinearLayout>
 

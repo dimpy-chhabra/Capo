@@ -6,6 +6,16 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
+/*
+*Project : CAPO, fully created by
+* Dimpy Chhabra, IGDTUW, BTech, IT
+* Second year (as of 2017)
+* Expected Class of 2019
+* Please do not circulate as your own
+* Criticism is appreciated to work on memory leaks and bugs
+* Contact Info : Find me on Linked in : linkedin.com/in/dimpy-chhabra
+*
+*/
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -67,7 +77,7 @@ public class Track extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.ViewPager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.ViewPagerTrack);
 
         // Create an adapter object that knows which fragment should be shown on each page
         SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
@@ -82,7 +92,11 @@ public class Track extends BaseActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent i = new Intent(Track.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            // super.onBackPressed();
+
         }
     }
 

@@ -4,6 +4,16 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+/*
+*Project : CAPO, fully created by
+* Dimpy Chhabra, IGDTUW, BTech, IT
+* Second year (as of 2017)
+* Expected Class of 2019
+* Please do not circulate as your own
+* Criticism is appreciated to work on memory leaks and bugs
+* Contact Info : Find me on Linked in : linkedin.com/in/dimpy-chhabra
+*
+*/
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +38,8 @@ public class BaseActivity extends AppCompatActivity
     public static final String letsCapo_Frag2 = "letsCapo_Frag2";
     public static final String getCapo_Frag1 = "getCapo_Frag1";
     public static final String getCapo_Frag2 = "getCapo_Frag2";
+    public static final String offered_rides_Frag = "My_offered_rides_Frag";
+    public static final String xxx = "zzz";
 
     //Shared Pref Column Names
     public static final String MyPref = "MPref";

@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
-
+/*
+*Project : CAPO, fully created by
+* Dimpy Chhabra, IGDTUW, BTech, IT
+* Second year (as of 2017)
+* Expected Class of 2019
+* Please do not circulate as your own
+* Criticism is appreciated to work on memory leaks and bugs
+* Contact Info : Find me on Linked in : linkedin.com/in/dimpy-chhabra
+*
+*/
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -29,6 +38,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.gms:play-services:10.2.1'
     compile 'com.android.support:support-v4:25.1.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.volley:volley:1.0.0'
+    testCompile 'junit:junit:4.12'
 }
