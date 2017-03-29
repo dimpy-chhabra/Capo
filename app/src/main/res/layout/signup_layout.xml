@@ -104,6 +104,28 @@
         android:background="@color/white_greyish" />
 
     <EditText
+        android:id="@+id/enrollNo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/pic"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:hint="enrollment number at college"
+        android:inputType="textCapWords"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/white_greyish" />
+
+    <EditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -126,7 +148,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/age"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -134,14 +156,37 @@
         android:drawableLeft="@drawable/pic"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:hint="@string/confirmPassword"
-        android:inputType="textPassword"
+        android:hint="Age! Old enough?"
+        android:inputType="number"
         android:padding="10dp"
         android:singleLine="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="16sp" />
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rg1">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:id="@+id/feRB1"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:id="@+id/maRB2"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RadioGroup>
     <CheckBox
         android:id="@+id/terms_conditions"
         android:layout_width="wrap_content"

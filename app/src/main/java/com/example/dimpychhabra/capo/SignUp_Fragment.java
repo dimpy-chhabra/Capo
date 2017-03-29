@@ -6,13 +6,10 @@ package com.example.dimpychhabra.capo;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,16 +40,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class SignUp_Fragment extends Fragment implements OnClickListener {
-    private static View view;
-    private static EditText fullName, emailId, mobileNumber, location,
-            password, confirmPassword;
-    private static TextView login;
-    private static Button signUpButton;
-    private static CheckBox terms_conditions;
+    private View view;
+    private EditText fullName, emailId, mobileNumber, location,
+            password, age, enrollno;
+    private TextView login;
+    private Button signUpButton;
+    private CheckBox terms_conditions;
+    private RadioButton rb1, rb2;
     RequestQueue requestQueue;
     StringRequest stringRequest;
 
-    private static String DataParseUrl = "http://impycapo.esy.es/register.php";
+    private String DataParseUrl = "http://impycapo.esy.es/register.php";
 
     public SignUp_Fragment() {
 
@@ -73,11 +72,13 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
         location = (EditText) view.findViewById(R.id.location);
         password = (EditText) view.findViewById(R.id.password);
-        confirmPassword = (EditText) view.findViewById(R.id.confirmPassword);
+        age = (EditText) view.findViewById(R.id.age);
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
-
+        rb1 = (RadioButton) view.findViewById(R.id.feRB1);
+        rb2 = (RadioButton) view.findViewById(R.id.maRB2);
+        enrollno = (EditText) view.findViewById(R.id.enrollNo);
         // Setting text selector over textviews
         XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
@@ -123,7 +124,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getMobileNumber = mobileNumber.getText().toString();
         String getLocation = location.getText().toString();
         String getPassword = password.getText().toString();
-        String getConfirmPassword = confirmPassword.getText().toString();
+        String getAge = age.getText().toString();
+        String getEnrollNo = enrollno.getText().toString();
+        String getSex = "M";
+        if (rb1.isChecked()) getSex = "F";
+
 
         // Pattern match for email id
         //Pattern p = Pattern.compile(BaseActivity.regEx);
@@ -132,7 +137,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         // Check if all strings are null or not
 
 
-        if (getFullName.equals("") || getEmailId.equals("") || getMobileNumber.equals("") || getLocation.equals("") || getPassword.equals("") || getConfirmPassword.equals(""))
+        if (getFullName.equals("") || getEmailId.equals("") || getMobileNumber.equals("")
+                || getLocation.equals("") || getPassword.equals("") ||
+                getAge.equals("") || getEnrollNo.equals(""))
             new CustomToast().Show_Toast(getActivity(), view, "All fields are required.");
 
             // Check if email id valid or not
@@ -141,9 +148,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             // "Your Email Id is Invalid.");
 
             // Check if both password should be equal
-        else if (!getConfirmPassword.equals(getPassword))
+        else if (!rb1.isChecked() && !rb2.isChecked())
+            new CustomToast().Show_Toast(getActivity(), view, "You missed out the (fe)male part!");
+        else if (Integer.parseInt(getAge) < 16)
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Both password doesn't match.");
+                    "You sure you in college? You dont seem old enough!");
 
             // Make sure user should check Terms and Conditions checkbox
         else if (!terms_conditions.isChecked())
@@ -152,18 +161,20 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
             // Else do signup or do your stuff
         else {
-            Toast.makeText(getActivity(), "Do SignUp. >>" + getFullName + " " + getEmailId + " " + getMobileNumber + " " + getLocation + " " + getPassword + " " + getConfirmPassword + " << ", Toast.LENGTH_SHORT).show();
-
-            registerUser(getFullName, getEmailId, getMobileNumber, getLocation, getPassword);
+            registerUser(getFullName, getEmailId, getMobileNumber, getLocation, getPassword, getSex, getEnrollNo, getAge);
+            new LoginBaseActivity().replaceLoginFragment();
         }
     }
 
-    public void registerUser(String name, final String email, String mob, String college, String passwrd) {
+    public void registerUser(String name, final String email, String mob, String college, String passwrd, String Sex, String Enrol, String Age) {
         final String Name = name;
         final String Email = email;
         final String Mob = mob;
         final String College = college;
         final String Pword = passwrd;
+        final String sex = Sex;
+        final String enroll = Enrol;
+        final String age = Age;
         stringRequest = new StringRequest(Request.Method.POST, DataParseUrl, new Response.Listener<String>() {
 
             @Override
@@ -186,16 +197,16 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                 }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("name", Name);
                 params.put("mob_no", Mob);
                 params.put("college", College);
                 params.put("email", Email);
-                params.put("dob", "dummy");
-                params.put("sex", "dummy");
+                params.put("dob", age);
+                params.put("sex", sex);
                 params.put("pword", Pword);
-                params.put("dp", "dummy");
-                params.put("fb_link", "dummy");
+                params.put("dp", " ");
+                params.put("fb_link", enroll);
 
                 return params;
             }
