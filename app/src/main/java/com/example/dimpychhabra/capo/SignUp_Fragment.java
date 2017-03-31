@@ -162,7 +162,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             // Else do signup or do your stuff
         else {
             registerUser(getFullName, getEmailId, getMobileNumber, getLocation, getPassword, getSex, getEnrollNo, getAge);
-            new LoginBaseActivity().replaceLoginFragment();
         }
     }
 
@@ -198,15 +197,15 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("name", Name);
-                params.put("mob_no", Mob);
-                params.put("college", College);
-                params.put("email", Email);
-                params.put("dob", age);
-                params.put("sex", sex);
-                params.put("pword", Pword);
-                params.put("dp", " ");
-                params.put("fb_link", enroll);
+                params.put("name", Name);  //u_name
+                params.put("mob_no", Mob);   //u_id
+                params.put("college", College);   //u_college
+                params.put("email", Email);     //u_email
+                params.put("dob", age);     //u_dob
+                params.put("sex", sex);     //u_sex
+                params.put("pword", Pword);     //pass
+                params.put("enroll", enroll);      //ignore
+                params.put("fb_link", " ");      //u_fb
 
                 return params;
             }

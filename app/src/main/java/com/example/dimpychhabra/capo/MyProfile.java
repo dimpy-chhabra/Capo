@@ -71,7 +71,11 @@ public class MyProfile extends BaseActivity {
          id = spref.getString(BaseActivity.Phone, null);
          email = spref.getString(BaseActivity.Email, null);
         college = spref.getString(BaseActivity.College, null);
-        dpres = spref.getString(BaseActivity.displaypic, null);
+        if (spref.getString(BaseActivity.displaypic, null) == "F") {
+            dpres = "@drawable/dc";
+        } else {
+            dpres = "@drawable/capopic";
+        }
         dets = spref.getString(BaseActivity.Extras, null);
 
 

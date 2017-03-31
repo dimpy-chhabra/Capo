@@ -45,6 +45,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -68,6 +69,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static FragmentManager fragmentManager;
     RequestQueue requestQueue;
     StringRequest stringRequest;
+    String final_response;
 
     private static String DataParseUrl = "http://impycapo.esy.es/login.php";
 
@@ -189,8 +191,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     // Check Validation before login
     private void checkValidation() {
         // Get email id and password
-        String getEmailId = emailid.getText().toString();
-        String getPassword = password.getText().toString();
+        String getEmailId = emailid.getText().toString().trim();
+        String getPassword = password.getText().toString().trim();
 
         // Check patter for email id
         //Pattern p = Pattern.compile(BaseActivity.regEx);
@@ -226,8 +228,10 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             @Override
             public void onResponse(String response) {
-
-                if (!response.equals("noBro")) {
+                final_response = response;
+                Toast.makeText(getActivity().getApplicationContext(), "  " + response, Toast.LENGTH_SHORT).show();
+                Log.e("response: ", "  " + response);
+                if (!response.equals("NO_PROF")) {
                     verified();
 
                 } else {
@@ -251,13 +255,13 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mob_no", mobile);
-                params.put("pword", pword);
+                params.put("password", pword);
 
                 return params;
             }
 
         };
-        //stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(stringRequest);
@@ -267,12 +271,15 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         Toast.makeText(getActivity(), "Successfully Loged IN!", Toast.LENGTH_SHORT).show();
         SharedPreferences preferences = this.getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BaseActivity.Name, "Dimpy123");
+        String[] tokens = final_response.split(">");
+        //Toast.makeText(getActivity().getApplicationContext(), " 0Name :"+tokens[0]+ " 1Phone :"+ tokens[1]+ " 2College :"+ tokens[2], Toast.LENGTH_SHORT).show();
+        Log.e("!!!!!!", " Name :" + tokens[0] + " Phone :" + tokens[1] + " College :" + tokens[2]);
+        editor.putString(BaseActivity.Name, tokens[0]);
         editor.putString(BaseActivity.IS_LOGIN, "true");
-        editor.putString(BaseActivity.Phone, "8586849999");
-        editor.putString(BaseActivity.displaypic, "@drawable/dc");
-        editor.putString(BaseActivity.College, "IGDTUW");
-        editor.putString(BaseActivity.Email, "abc@xyz.com");
+        editor.putString(BaseActivity.Phone, tokens[1]); //1
+        editor.putString(BaseActivity.displaypic, tokens[4]);  //4
+        editor.putString(BaseActivity.College, tokens[2]); //2
+        editor.putString(BaseActivity.Email, tokens[3]);  //3
         editor.putString(BaseActivity.Extras, "Female, 19 years old, does not have license :O ");
         editor.commit();
         Toast.makeText(getActivity(), "Shared Pref added!", Toast.LENGTH_SHORT).show();

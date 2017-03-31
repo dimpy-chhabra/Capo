@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -42,13 +43,16 @@ public class FirstActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
         Log.e("in FullScreen Activity ","name : "+a+" phone : "+b+" isloggedin? : "+c);
         if(c.equals("true")){
+            Toast.makeText(FirstActivity.this, "Welcome Fellow User", Toast.LENGTH_SHORT).show();
             Log.e("in  Activity in if","name : "+a+" phone : "+b+" isloggedin? : "+c);
             Intent i  = new Intent(FirstActivity.this, MainActivity.class);
             startActivity(i);
             finish();
         }else {
+            Toast.makeText(FirstActivity.this, "Start Saving money with Capo TODAY!", Toast.LENGTH_SHORT).show();
             Intent i  = new Intent(FirstActivity.this, LoginBaseActivity.class);
             startActivity(i);
             finish();
