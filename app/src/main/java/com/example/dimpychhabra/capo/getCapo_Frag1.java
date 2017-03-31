@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class getCapo_Frag1 extends Fragment implements View.OnClickListener {
+public class getCapo_Frag1 extends Fragment {
 
     private static View view;
     private static Button button;
@@ -45,7 +45,33 @@ public class getCapo_Frag1 extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_get_capo__frag1, container, false);
         initViews();
-        setListeners();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String To, From, FromTime;
+                To = to.getText().toString();
+                From = from.getText().toString();
+                FromTime = from.getText().toString();
+
+                if (To.equals("") || FromTime.equals("") || From.equals("")) {
+                    Log.e("in lets capo frag1", " equals null");
+                    new CustomToast().Show_Toast(getActivity(), view, "Please enter All details in order to proceed.");
+                } else {
+
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
+                            .replace(R.id.frameContainer, new getCapo_Frag2(),
+                                    BaseActivity.getCapo_Frag2)
+
+                            .commit();
+                }
+            }
+        });
+
+
         return view;
     }
 
@@ -57,31 +83,4 @@ public class getCapo_Frag1 extends Fragment implements View.OnClickListener {
         fromTime = (EditText) view.findViewById(R.id.fromTime);
     }
 
-    private void setListeners() {
-        button.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.b1:
-                if (to.getText().toString().equals("") || fromTime.getText().toString().equals("") || from.getText().toString().equals("")) {
-                    Log.e("in lets capo frag1", " equals null");
-                    new CustomToast().Show_Toast(getActivity(), view, "Please enter All details in order to proceed.");
-                } else {
-
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                            .replace(R.id.frameContainer, new getCapo_Frag2(),
-                                    BaseActivity.getCapo_Frag2)
-                            .commit();
-
-                }
-                break;
-            case R.id.to:
-                Log.e("ablah ", " ablhad ");
-                break;
-        }
-    }
 }

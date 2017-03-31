@@ -30,15 +30,18 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MyProfile extends BaseActivity {
 
-    TextView tvName, tvEmail, tvMobile, tvCardets, tvCollege;
+    TextView tvName, tvEmail, tvMobile, tvCardets, tvCollege, tvEnroll;
     ImageView dp;
     String id ;
     String name;
     String dets;
     String email;
     String college;
+    String enroll;
     String dpres;
 
     @Override
@@ -49,6 +52,9 @@ public class MyProfile extends BaseActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.INVISIBLE);
+
+        /*
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +62,8 @@ public class MyProfile extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
+         */
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,10 +79,11 @@ public class MyProfile extends BaseActivity {
          id = spref.getString(BaseActivity.Phone, null);
          email = spref.getString(BaseActivity.Email, null);
         college = spref.getString(BaseActivity.College, null);
-        if (spref.getString(BaseActivity.displaypic, null) == "F") {
-            dpres = "@drawable/dc";
+        enroll = spref.getString(BaseActivity.Enroll, null);
+        if (spref.getString(BaseActivity.displaypic, null).trim().equals("F")) {
+            dpres = "@drawable/fpp";
         } else {
-            dpres = "@drawable/capopic";
+            dpres = "@drawable/mpp";
         }
         dets = spref.getString(BaseActivity.Extras, null);
 
@@ -85,6 +94,7 @@ public class MyProfile extends BaseActivity {
         tvMobile = (TextView)findViewById(R.id.tvMobile);
         tvCardets = (TextView)findViewById(R.id.tvCar);
         tvCollege = (TextView) findViewById(R.id.tvCollege);
+        tvEnroll = (TextView) findViewById(R.id.tvEnroll);
         dp = (ImageView)findViewById(R.id.iv1);
         int id1 = getResources().getIdentifier(dpres, "drawable", getPackageName());
         dp.setImageResource(id1);
@@ -94,6 +104,7 @@ public class MyProfile extends BaseActivity {
         tvMobile.setText(id);
         tvCollege.setText(college);
         tvCardets.setText(dets);
+        tvEnroll.setText(enroll);
 
     }
 

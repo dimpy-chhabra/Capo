@@ -273,13 +273,17 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         SharedPreferences.Editor editor = preferences.edit();
         String[] tokens = final_response.split(">");
         //Toast.makeText(getActivity().getApplicationContext(), " 0Name :"+tokens[0]+ " 1Phone :"+ tokens[1]+ " 2College :"+ tokens[2], Toast.LENGTH_SHORT).show();
-        Log.e("!!!!!!", " Name :" + tokens[0] + " Phone :" + tokens[1] + " College :" + tokens[2]);
+        Log.e("!!!!!!", " Name :" + tokens[0] + " Phone :" + tokens[1] + " College :" +
+                tokens[2] + " email :" + tokens[3] + " sex :>" + tokens[4] + "< enroll :" + tokens[5] + " fb_link :" + tokens[6]);
         editor.putString(BaseActivity.Name, tokens[0]);
         editor.putString(BaseActivity.IS_LOGIN, "true");
         editor.putString(BaseActivity.Phone, tokens[1]); //1
         editor.putString(BaseActivity.displaypic, tokens[4]);  //4
         editor.putString(BaseActivity.College, tokens[2]); //2
         editor.putString(BaseActivity.Email, tokens[3]);  //3
+        editor.putString(BaseActivity.Enroll, tokens[5]);  //5
+        editor.putString(BaseActivity.fb_link, tokens[6]);  //6
+
         editor.putString(BaseActivity.Extras, "Female, 19 years old, does not have license :O ");
         editor.commit();
         Toast.makeText(getActivity(), "Shared Pref added!", Toast.LENGTH_SHORT).show();

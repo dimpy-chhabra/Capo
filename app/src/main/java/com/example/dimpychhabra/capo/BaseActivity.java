@@ -52,6 +52,8 @@ public class BaseActivity extends AppCompatActivity
     public static final String displaypic = "picKey";
     public static final String College = "collegeKey";
     public static final String Email = "emailKey";
+    public static final String Enroll = "enrollmentKey";
+    public static final String fb_link = "fbLinkKey";
     public static final String Extras = "extrasKey";
 
     @Override

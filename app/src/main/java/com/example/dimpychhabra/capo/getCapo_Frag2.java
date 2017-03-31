@@ -23,16 +23,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 
 public class getCapo_Frag2 extends Fragment implements View.OnClickListener{
-
     private static View view;
     private static TextView tv1;
     private static Button b1;
     private static FragmentManager fragmentManager;
+    String data;
 
     public getCapo_Frag2() {
         // Required empty public constructor
@@ -50,6 +51,20 @@ public class getCapo_Frag2 extends Fragment implements View.OnClickListener{
         view = inflater.inflate(R.layout.fragment_get_capo__frag2, container, false);
         initViews();
         setListeners();
+
+        final Bundle bdl = getArguments();
+
+        String str = "";
+        try {
+            str = bdl.getString("rideId");
+        } catch (final Exception e) {
+            Log.e("!!!!!!!!!!!!!!!", " errrrr" + str);
+        }
+
+        //Bundle args = getArguments();
+        //String value = args.getString("rideId");
+        Log.e("!!!!!!!!!!!!!!!", "" + str);
+        Toast.makeText(getActivity().getApplicationContext(), "  >>>>>> " + str, Toast.LENGTH_SHORT).show();
         return view;
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

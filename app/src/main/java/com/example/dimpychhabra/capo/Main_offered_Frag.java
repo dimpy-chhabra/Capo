@@ -94,8 +94,6 @@ public class Main_offered_Frag extends Fragment {
                 My_offered_rides_Frag frag = new My_offered_rides_Frag();
                 Bundle args = new Bundle();
                 args.putString("rideId", "" + ride.getR_id());
-
-
                 frag.setArguments(args);
 
                 fragmentManager

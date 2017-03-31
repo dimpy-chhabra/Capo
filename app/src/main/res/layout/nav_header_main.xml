@@ -19,7 +19,7 @@
         android:layout_height="75sp"
         android:scaleType="fitCenter"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/dc" />
+        app:srcCompat="@drawable/capopic" />
 
     <TextView
         android:layout_width="match_parent"
