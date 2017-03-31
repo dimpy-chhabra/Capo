@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <FrameLayout
+        android:id="@+id/frameContainerTrack"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:padding="16sp"
+        android:background="@color/white"
+        android:layout_below="@+id/close_activity" />
+
+    <!--android:layout_below="@id/tv1"-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ViewPagerTrack"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tv1"
+        android:padding="16sp"
+        android:background="@color/white" />
+</LinearLayout>

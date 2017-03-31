@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16sp"
+    tools:context="com.example.dimpychhabra.capo.My_offered_rides_Frag">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R_id"
+        android:id="@+id/r_id_tv1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my ride id"
+        android:layout_toRightOf="@id/r_id_tv1"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:id="@+id/r_id_tv2"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to"
+        android:layout_below="@id/r_id_tv1"
+        android:id="@+id/to_tv1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IGDTU"
+        android:layout_toRightOf="@+id/to_tv1"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_below="@+id/r_id_tv2"
+        android:id="@+id/to_tv2"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="from"
+        android:layout_below="@id/to_tv1"
+        android:id="@+id/from_tv1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="house"
+        android:layout_toRightOf="@+id/to_tv1"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_below="@+id/to_tv2"
+        android:id="@+id/from_tv2"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SeatsOccu"
+        android:layout_below="@id/from_tv1"
+        android:id="@+id/seats_tv1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:layout_toRightOf="@+id/to_tv1"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_below="@+id/from_tv2"
+        android:id="@+id/seats_tv2"
+        android:textSize="30sp" />
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/seats_tv2"
+        android:id="@+id/listViewOffRid"
+        android:drawSelectorOnTop="true" />
+
+
+</RelativeLayout>
