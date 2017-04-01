@@ -181,9 +181,6 @@ public class Track extends BaseActivity {
             startActivity(i);
             finish();
         } else if (id == R.id.nav_get_capo) {
-            Intent i = new Intent(Track.this, GetCapo.class);
-            startActivity(i);
-            finish();
 
 
         } else if (id == R.id.nav_lets_capo) {

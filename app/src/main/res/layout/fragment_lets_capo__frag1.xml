@@ -1,3 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,44 +10,278 @@
     android:orientation="vertical"
     tools:context="com.example.dimpychhabra.capo.letsCapo_Frag1">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <EditText
-        android:id="@+id/from"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:id="@+id/date"
+        android:hint="dd/mm/yyyy" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="bottom"
-        android:hint="From??"
-        android:padding="16sp"
-        android:textSize="20sp" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/fromTime"
+        <EditText
+            android:id="@+id/from"
+            android:layout_width="0sp"
+            android:layout_height="55sp"
+            android:layout_marginRight="8sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:hint="From??"
+            android:layout_gravity="center"
+            android:padding="16sp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/to"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="8sp"
+            android:hint="To??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16sp"
         android:layout_weight="1"
-        android:gravity="bottom"
-        android:hint="When ya leaving man??"
-        android:padding="16sp"
-        android:textSize="20sp" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/to"
+
+        <EditText
+            android:id="@+id/fromTime"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:hint="From Time??"
+            android:padding="16sp"
+            android:textSize="20sp" />
+
+
+        <EditText
+            android:id="@+id/toTime"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="8sp"
+            android:hint="To : Time??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:hint="To??"
-        android:padding="16sp"
-        android:textSize="20sp" />
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:text="Enter the number of seats:"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg"
+        android:layout_marginTop="2sp"
         android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0sp"
+            android:layout_height="50sp"
+            android:layout_weight="1"
+            android:id="@+id/btn_dec"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:onClick="decrease"
+            android:text="-"
+            android:gravity="center"
+            android:background="@drawable/ripple_effect" />
+
+        <TextView
+            android:layout_width="0sp"
+            android:textColor="@color/white"
+            android:layout_height="60sp"
+            android:layout_weight="1"
+            android:text="2"
+            android:id="@+id/seats"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="50sp" />
+
+        <Button
+            android:layout_width="0sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_height="50sp"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:onClick="increase"
+            android:id="@+id/btn_inc"
+            android:text="+"
+            android:background="@drawable/ripple_effect" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_marginTop="16sp"
+        android:text="Enter the pick up points details"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/pp1"
+            android:layout_width="0sp"
+            android:layout_height="55sp"
+            android:layout_marginRight="8sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:hint="PP1??"
+            android:layout_gravity="center"
+            android:padding="16sp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp1Time"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="4sp"
+            android:hint="Time of pp??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp1Price"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="4sp"
+            android:hint="Price pp??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/pp2"
+            android:layout_width="0sp"
+            android:layout_height="55sp"
+            android:layout_marginRight="8sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:hint="pp2??"
+            android:layout_gravity="center"
+            android:padding="16sp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp2Time"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="8sp"
+            android:hint="time of pp2??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp2Price"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="4sp"
+            android:hint="Price pp2??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/pp3"
+            android:layout_width="0sp"
+            android:layout_height="55sp"
+            android:layout_marginRight="8sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:hint="pp3??"
+            android:layout_gravity="center"
+            android:padding="16sp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp3Time"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="8sp"
+            android:hint="Time of pp3??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/pp3Price"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="8sp"
+            android:hint="Price pp3??"
+            android:padding="16sp"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:background="@drawable/ripple_effect"
         android:gravity="bottom"
         android:text="Leggo!"
-        android:id="@+id/b1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:id="@+id/bSubmit"
         android:padding="16sp"
         android:textSize="20sp" />
 </LinearLayout>
+</ScrollView>

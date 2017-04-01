@@ -155,7 +155,7 @@ public class MyProfile extends BaseActivity {
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_get_capo) {
-            Intent i = new Intent(MyProfile.this, GetCapo.class);
+            Intent i = new Intent(MyProfile.this, Track.class);
             startActivity(i);
             finish();
 

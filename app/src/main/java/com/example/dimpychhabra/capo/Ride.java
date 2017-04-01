@@ -32,6 +32,7 @@ public class Ride {
     private String no_seats_occ  ;
     private String price;
     private String extras;
+    private String dateORide;
 
     private String[] ppat= new String [10];  //pickupPointAndTime : max 10
     private String[] occupents = new String[5]; //max 5 riders per car : otherwise its being commercialized
@@ -50,13 +51,13 @@ public class Ride {
 
     public Ride(String startLoc, String DestiLoc,
                 String seats, String stTime,
-                String DestiTime, String Price, String R_id) {
+                String DestiTime, String DateOride, String R_id) {
         start_loc = startLoc;
         desti_loc = DestiLoc;
         no_seats = seats;
         start_time = stTime;
         exp_desti_time = DestiTime;
-        price = Price;
+        dateORide = DateOride;
         r_id = R_id;
     }
 
@@ -98,6 +99,10 @@ public class Ride {
 
     public String getR_id() {
         return r_id;
+    }
+
+    public String getDateORide() {
+        return dateORide;
     }
 
 

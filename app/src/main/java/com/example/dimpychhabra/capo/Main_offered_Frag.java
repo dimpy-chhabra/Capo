@@ -1,6 +1,7 @@
 package com.example.dimpychhabra.capo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,8 +25,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Main_offered_Frag extends Fragment {
@@ -36,6 +48,11 @@ public class Main_offered_Frag extends Fragment {
     EditText to, from, fromTime;
     FragmentManager fragmentManager;
     TextView tv11, tv22;
+    RequestQueue requestQueue;
+    StringRequest stringRequest;
+    String final_response = "dummy";
+
+    private static String DataParseUrl = "http://impycapo.esy.es/offeredRidesList.php";
 
     public Main_offered_Frag() {
         // Required empty public constructor
@@ -68,6 +85,17 @@ public class Main_offered_Frag extends Fragment {
 
         //here we will fetch data from database via volley --> make an object --> set adapter and work accordingly
         final ArrayList<Ride> ridesArrayList = new ArrayList<>();
+
+        String res = fetchData();
+        String[] tokens = res.split(">");
+        //Toast.makeText(getActivity().getApplicationContext(), " 0Name :"+tokens[0]+ " 1Phone :"+ tokens[1]+ " 2College :"+ tokens[2], Toast.LENGTH_SHORT).show();
+        Log.e("!!!!!!", " THING1 :" + tokens[0] + " THING2 :" + tokens[1] + " THING3 :" +
+                tokens[2] + " THING4 :" + tokens[3] + " THING5 :>" + tokens[4] + "< THING6 :" + tokens[5] + " THING7 :" + tokens[6]);
+
+        //In order to break the rows: iterate till : <br> is reached
+        // and then send in 7 tokens into the constructor via a loop!
+
+
         ridesArrayList.add(new Ride("Rajiv Chownk", "IGDTU", " 3 seats ", " 10:00 am ", "12:00 pm ", " 120", "ride001"));
         ridesArrayList.add(new Ride("Pitampura", "DTU", " 2 seats ", " 09:00 am ", "10:00 am ", " 120", "ride002"));
         ridesArrayList.add(new Ride("Rohini", "NSIT", " 3 seats ", " 07:00 am ", "08:00 am ", " 120", "ride003"));
@@ -104,6 +132,54 @@ public class Main_offered_Frag extends Fragment {
         });
 
         return view;
+    }
+
+    private String fetchData() {
+        SharedPreferences spref = getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
+        final String mobile = spref.getString(BaseActivity.Phone, null);
+
+        stringRequest = new StringRequest(Request.Method.POST, DataParseUrl, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                final_response = response;
+                Toast.makeText(getActivity().getApplicationContext(), "  " + response, Toast.LENGTH_SHORT).show();
+                Log.e("response: ", "  " + response);
+                if (!response.equals("NO_RIDES_OFFERED")) {
+                    Log.e(" In onResponse : ", "Values obtained");
+
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "No Rides Offered by you!", Toast.LENGTH_LONG).show();
+                    Log.e("in login frag", "  " + response);
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error != null && error.toString().length() > 0)
+                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(getContext(), "Something went terribly wrong! ", Toast.LENGTH_LONG).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mob_no", mobile);
+                return params;
+            }
+
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(stringRequest);
+
+        return final_response;
+
     }
 
 }

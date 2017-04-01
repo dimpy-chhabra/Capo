@@ -130,7 +130,7 @@ public class LetsCapo extends BaseActivity {
             finish();
 
         } else if (id == R.id.nav_get_capo) {
-            Intent i = new Intent(LetsCapo.this, GetCapo.class);
+            Intent i = new Intent(LetsCapo.this, Track.class);
             startActivity(i);
             finish();
 

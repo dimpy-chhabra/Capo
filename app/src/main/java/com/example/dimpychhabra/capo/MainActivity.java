@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
             finish();
 
         } else if (id == R.id.nav_get_capo) {
-            Intent i = new Intent(MainActivity.this, GetCapo.class);
+            Intent i = new Intent(MainActivity.this, Track.class);
             startActivity(i);
             finish();
 
@@ -113,6 +113,7 @@ public class MainActivity extends BaseActivity {
         } else if (id == R.id.nav_lets_capo) {
             Intent i = new Intent(MainActivity.this, LetsCapo.class);
             startActivity(i);
+            finish();
             finish();
 
         }
