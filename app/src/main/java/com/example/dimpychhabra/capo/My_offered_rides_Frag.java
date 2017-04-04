@@ -17,6 +17,7 @@ import android.os.Bundle;
 */
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class My_offered_rides_Frag extends Fragment {
     RequestQueue requestQueue;
     StringRequest stringRequest;
     String res, res2;
+    String riderId;
     private String DataParseUrl = "http://impycapo.esy.es/proposalsList.php";
     private String DataParseUrl2 = "http://impycapo.esy.es/updateStatus.php";
 
@@ -95,7 +97,7 @@ public class My_offered_rides_Frag extends Fragment {
 
                 Ride ride = ridesArrayList.get(position);
                 final String proId = ride.getPp_id();
-                final String riderId = ride.getRider_id();
+                riderId = ride.getRider_id();
                 Log.e("onItem Click ", " " + ride.getPp_id());
                 Log.e("onItem Click ", " " + ride.getRider_id());
 
@@ -105,7 +107,7 @@ public class My_offered_rides_Frag extends Fragment {
                         .setPositiveButton("Lets CAPO", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 changestatus(proId, riderId);
-                                //sendEmail();
+                                sendSms();
                                 Toast.makeText(getActivity().getApplicationContext(), "WE CAPO-ED! <3", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -128,6 +130,12 @@ public class My_offered_rides_Frag extends Fragment {
         Toast.makeText(getActivity().getApplicationContext(), "YO! ", Toast.LENGTH_SHORT).show();
 
         return view;
+    }
+
+    private void sendSms() {
+
+        SmsManager smsm = SmsManager.getDefault();
+        smsm.sendTextMessage(riderId, null, "Your Proposal has been accepted! Congrats! -Regards Capo( Happy fuel Saving)", null, null);
     }
 
     private void changestatus(final String proId, final String riderId) {
@@ -200,7 +208,8 @@ public class My_offered_rides_Frag extends Fragment {
             @Override
             public void onResponse(String response) {
                 if (response != null && response.length() > 0) {
-                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                    Log.e("in my offered rides ", " " + response);
                     res = response;
                 } else {
                     Toast.makeText(getContext(), "No proposals to ride with you!!! Sorry", Toast.LENGTH_LONG).show();
