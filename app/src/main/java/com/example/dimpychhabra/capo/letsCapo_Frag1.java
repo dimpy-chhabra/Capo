@@ -111,7 +111,7 @@ public class letsCapo_Frag1 extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity().getApplicationContext(), "Sorry Man, cant pool more than 6", Toast.LENGTH_SHORT).show();
             }
 
-            case R.id.b1:
+            case R.id.bSubmit:
                 if (date.equals("") || to.equals("") || from.equals("") || fromTime.equals("") || toTime.equals("") || pp1.equals("") || pp1Time.equals("") || pp1Price.equals(""))
                 {   Log.e("in lets capo frag1"," equals null");
                     new CustomToast().Show_Toast(getActivity(), view, "Please enter All details in order to proceed. and atleast 1 PICK UP POINT");
@@ -203,16 +203,11 @@ public class letsCapo_Frag1 extends Fragment implements View.OnClickListener {
                 params.put("pp3Time", Pp3Time);
                 params.put("pp3Price", Pp3Price);     //
                 params.put("extra", "Merry CarPooling!");
-
                 return params;
             }
-
         };
         //stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
-
 }

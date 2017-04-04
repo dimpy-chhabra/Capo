@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Created by Dimpy Chhabra on 3/26/2017.
  */
 
-public class RideAdapter extends ArrayAdapter<Ride>{
+public class RideAdapter extends ArrayAdapter<Ride> {
 
     public RideAdapter(Context context, ArrayList<Ride> ridesArrayList){
         super(context, 0, ridesArrayList);
@@ -43,27 +43,22 @@ public class RideAdapter extends ArrayAdapter<Ride>{
         //getting the view into a variable listItemView
         if(listItemView == null){
             listItemView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.ride_item, parent, false);
+                    .inflate(R.layout.ride_item_found, parent, false);
         }
         //This is to ensure the reusablity of a view
 
         Ride currentRide = getItem(position);
 
         TextView fromTo = (TextView) listItemView.findViewById(R.id.textViewDirections);
-        fromTo.setText(currentRide.getStart_loc() + " TO " + currentRide.getDesti_loc());
+        fromTo.setText(currentRide.getPp() + " TO " + currentRide.getDesti_loc());
 
-        TextView price = (TextView) listItemView.findViewById(R.id.Seats);
-        price.setText(" Seats: " + (currentRide.getNo_seats()) + " and Occupied " + currentRide.getNo_seats_occ());
-
-        TextView tc = (TextView) listItemView.findViewById(R.id.StartingTime);
-        tc.setText("at:" + currentRide.getStart_time());
-
-        TextView extras = (TextView) listItemView.findViewById(R.id.Extra);
-        extras.setText(" Extras : " + currentRide.getExtras());
+        TextView price = (TextView) listItemView.findViewById(R.id.textClock);
+        price.setText("PickUpTime@ " + (currentRide.getPp_time()));
 
         TextView pricetag = (TextView) listItemView.findViewById(R.id.pricetag);
-        pricetag.setText("Rs. " + currentRide.getPrice());
+        pricetag.setText("Rs. " + currentRide.getPp_price());
 
         return listItemView;
     }
 }
+

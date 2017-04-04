@@ -33,25 +33,47 @@ public class Ride {
     private String price;
     private String extras;
     private String dateORide;
+    private String rider_id;
 
-    private String[] ppat= new String [10];  //pickupPointAndTime : max 10
-    private String[] occupents = new String[5]; //max 5 riders per car : otherwise its being commercialized
+    private String pp;
+    private String pp_time;
+    private String pp_price;
+    private String pp_id;
+
+    //(pp, pp_time, pp_price, pp_id, college, r_id);
    // private Context context;
     public Ride(){
     }
 
-    public Ride(String startLoc, String DestiLoc, String seats, String stTime, String DestiTime, String Price) {
-        start_loc = startLoc;
-        desti_loc = DestiLoc;
-        no_seats = seats;
-        start_time = stTime;
-        exp_desti_time = DestiTime;
-        price = Price;
+    public Ride(String PP, String PP_time, String PP_price, String PP_id, String college, String rid) {
+        pp = PP;
+        pp_time = PP_time;
+        pp_price = PP_price;
+        pp_id = PP_id;
+        desti_loc = college;
+        r_id = rid;
     }
 
-    public Ride(String startLoc, String DestiLoc,
-                String seats, String stTime,
-                String DestiTime, String DateOride, String R_id) {
+    //r_id, rider_id, _pp_id, college
+    public Ride(String R_ID, String RIDER_ID, String PP_ID, String col) {
+        r_id = R_ID;
+        rider_id = RIDER_ID;
+        pp_id = PP_ID;
+        desti_loc = col;
+    }
+
+
+//    public Ride(String startLoc, String DestiLoc, String seats, String stTime, String DestiTime, String Price) {
+//        start_loc = startLoc;
+//        desti_loc = DestiLoc;
+//        no_seats = seats;
+//        start_time = stTime;
+//        exp_desti_time = DestiTime;
+//        price = Price;
+//    }
+
+
+    public Ride(String startLoc, String DestiLoc, String seats, String stTime, String DestiTime, String DateOride, String R_id) {
         start_loc = startLoc;
         desti_loc = DestiLoc;
         no_seats = seats;
@@ -71,6 +93,10 @@ public class Ride {
 
     public String getDesti_loc() {
         return desti_loc;
+    }
+
+    public String getRider_id() {
+        return rider_id;
     }
 
     public String getStart_time() {
@@ -103,6 +129,22 @@ public class Ride {
 
     public String getDateORide() {
         return dateORide;
+    }
+
+    public String getPp() {
+        return pp;
+    }
+
+    public String getPp_time() {
+        return pp_time;
+    }
+
+    public String getPp_price() {
+        return pp_price;
+    }
+
+    public String getPp_id() {
+        return pp_id;
     }
 
 

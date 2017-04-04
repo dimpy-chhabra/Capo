@@ -35,6 +35,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +54,7 @@ public class Main_offered_Frag extends Fragment {
     TextView tv11, tv22;
     RequestQueue requestQueue;
     StringRequest stringRequest;
-    String final_response = "dummy";
+    String res = "dummy";
 
     private static String DataParseUrl = "http://impycapo.esy.es/offeredRidesList.php";
 
@@ -61,7 +65,6 @@ public class Main_offered_Frag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -84,24 +87,17 @@ public class Main_offered_Frag extends Fragment {
         });
 
         //here we will fetch data from database via volley --> make an object --> set adapter and work accordingly
-        final ArrayList<Ride> ridesArrayList = new ArrayList<>();
+        volleyToFetchResponse();
 
-        String res = fetchData();
-        String[] tokens = res.split(">");
-        //Toast.makeText(getActivity().getApplicationContext(), " 0Name :"+tokens[0]+ " 1Phone :"+ tokens[1]+ " 2College :"+ tokens[2], Toast.LENGTH_SHORT).show();
-        Log.e("!!!!!!", " THING1 :" + tokens[0] + " THING2 :" + tokens[1] + " THING3 :" +
-                tokens[2] + " THING4 :" + tokens[3] + " THING5 :>" + tokens[4] + "< THING6 :" + tokens[5] + " THING7 :" + tokens[6]);
+        //final ArrayList<Ride> ridesArrayList = new ArrayList<>(); //Max Pric
+        final ArrayList<Ride> ridesArrayList = extractRides(res);
 
-        //In order to break the rows: iterate till : <br> is reached
-        // and then send in 7 tokens into the constructor via a loop!
+        //ridesArrayList.add(new Ride("Rajiv Chownk", "IGDTU", " 3 seats ", " 10:00 am ", "12:00 pm ", " 120", "ride001"));
+        //ridesArrayList.add(new Ride("Pitampura", "DTU", " 2 seats ", " 09:00 am ", "10:00 am ", " 120", "ride002"));
+        //ridesArrayList.add(new Ride("Rohini", "NSIT", " 3 seats ", " 07:00 am ", "08:00 am ", " 120", "ride003"));
+        //ridesArrayList.add(new Ride("NSP", "IIITD", " 1 seat ", " 10:00 am ", "11:00 am ", " 120", "ride004"));
 
-
-        ridesArrayList.add(new Ride("Rajiv Chownk", "IGDTU", " 3 seats ", " 10:00 am ", "12:00 pm ", " 120", "ride001"));
-        ridesArrayList.add(new Ride("Pitampura", "DTU", " 2 seats ", " 09:00 am ", "10:00 am ", " 120", "ride002"));
-        ridesArrayList.add(new Ride("Rohini", "NSIT", " 3 seats ", " 07:00 am ", "08:00 am ", " 120", "ride003"));
-        ridesArrayList.add(new Ride("NSP", "IIITD", " 1 seat ", " 10:00 am ", "11:00 am ", " 120", "ride004"));
-
-        RideAdapter rideAdapter = new RideAdapter(getActivity(), ridesArrayList);
+        RidesFoundAdapter rideAdapter = new RidesFoundAdapter(getActivity(), ridesArrayList);
         ListView listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(rideAdapter);
 
@@ -134,32 +130,50 @@ public class Main_offered_Frag extends Fragment {
         return view;
     }
 
-    private String fetchData() {
-        SharedPreferences spref = getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
-        final String mobile = spref.getString(BaseActivity.Phone, null);
+    private ArrayList<Ride> extractRides(String res) {
+        ArrayList<Ride> ridesAL = new ArrayList<>();
+        try {
+            JSONArray baseArray = new JSONArray(res);
+            for (int i = 0; i < baseArray.length(); i++) {
+                JSONObject currentRide = baseArray.getJSONObject(i);
+                String from = currentRide.getString("from_loc");
+                String to = currentRide.getString("to_college");
+                String seats = currentRide.getString("num_seats");
+                String ftime = currentRide.getString("from_time");
+                String rtime = currentRide.getString("reach_time");
+                String rdate = currentRide.getString("r_date");
+                String r_id = currentRide.getString("r_id");
 
+                Ride ride = new Ride(from, to, seats, ftime, rtime, rdate, r_id);
+                ridesAL.add(ride);
+            }
+
+
+        } catch (JSONException e) {
+            Log.e("in ExtractRides : ", "JSON TRY CATCH ERR!");
+        }
+        return ridesAL;
+    }
+
+    private void volleyToFetchResponse() {
         stringRequest = new StringRequest(Request.Method.POST, DataParseUrl, new Response.Listener<String>() {
-
             @Override
             public void onResponse(String response) {
-                final_response = response;
-                Toast.makeText(getActivity().getApplicationContext(), "  " + response, Toast.LENGTH_SHORT).show();
-                Log.e("response: ", "  " + response);
-                if (!response.equals("NO_RIDES_OFFERED")) {
-                    Log.e(" In onResponse : ", "Values obtained");
-
+                if (response != null && response.length() > 0) {
+                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                    res = response;
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "No Rides Offered by you!", Toast.LENGTH_LONG).show();
-                    Log.e("in login frag", "  " + response);
+                    Toast.makeText(getContext(), "You didnt offer no rides!", Toast.LENGTH_LONG).show();
                 }
-
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if (error != null && error.toString().length() > 0)
+                        if (error != null && error.toString().length() > 0) {
                             Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show();
+                            Log.e(" in main_Offered_Frag", " error in parsing data");
+                        }
                         else
                             Toast.makeText(getContext(), "Something went terribly wrong! ", Toast.LENGTH_LONG).show();
 
@@ -167,19 +181,16 @@ public class Main_offered_Frag extends Fragment {
                 }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("mob_no", mobile);
+                Map<String, String> params = new HashMap<>();
+                SharedPreferences spref = getActivity().getSharedPreferences(BaseActivity.MyPref, Context.MODE_PRIVATE);
+                final String dr_id = spref.getString(BaseActivity.Phone, null); // getting String
+                params.put("driver", dr_id);
                 return params;
             }
-
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(40000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(stringRequest);
-
-        return final_response;
-
     }
 
 }
