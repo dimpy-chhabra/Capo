@@ -20,7 +20,7 @@
             android:layout_margin="4dp"
             android:contentDescription="@string/closebutton"
             android:padding="5dp"
-            android:src="@drawable/common_full_open_on_phone" />
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
         <FrameLayout
             android:id="@+id/frameContainer"
